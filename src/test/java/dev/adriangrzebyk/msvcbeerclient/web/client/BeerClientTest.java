@@ -12,21 +12,21 @@ import java.util.UUID;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest
-class BreweryClientTest {
+class BeerClientTest {
 
 	@Autowired
-	BreweryClient client;
+	BeerClient client;
 
 	@Test
 	public void shouldGetBeerById() {
 		BeerDto dto = client.getBeerById(UUID.randomUUID());
-		assertThat(dto.getBeerName()).isEqualTo("Galaxy Cat");
-		assertThat(dto.getBeerStyle()).isEqualTo(BeerStyle.PALE_ALE);
+		assertThat(dto.beerName()).isEqualTo("Galaxy Cat");
+		assertThat(dto.beerStyle()).isEqualTo(BeerStyle.PALE_ALE);
 	}
 
 	@Test
 	public void shouldCreateNewBeer() {
-		BeerDto dto = BeerDto.builder().beerName("New Beer").build();
+		BeerDto dto = new BeerDto(UUID.randomUUID(), "New Beer", BeerStyle.PALE_ALE, 123L);
 		URI uri = client.saveNewBeer(dto);
 		assertThat(uri).isNotNull();
 		System.out.println(uri);
@@ -34,7 +34,7 @@ class BreweryClientTest {
 
 	@Test
 	public void shouldUpdateBeer() {
-		BeerDto dto = BeerDto.builder().beerName("BeerName").build();
+		BeerDto dto = new BeerDto(UUID.randomUUID(), "Beer Name", BeerStyle.PALE_ALE, 123L);
 		client.updateBeer(UUID.randomUUID(), dto);
 	}
 

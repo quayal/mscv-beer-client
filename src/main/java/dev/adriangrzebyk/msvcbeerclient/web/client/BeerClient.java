@@ -11,13 +11,13 @@ import java.util.UUID;
 
 @Component
 @ConfigurationProperties(value = "sfg.brewery", ignoreUnknownFields = false)
-public class BreweryClient {
+public class BeerClient {
 
 	private final String BEER_PATH_V1 = "/api/v1/beer/";
 	private String apihost;
 	private final RestTemplate restTemplate;
 
-	public BreweryClient(RestTemplateBuilder restTemplateBuilder) {
+	public BeerClient(RestTemplateBuilder restTemplateBuilder) {
 		this.restTemplate = restTemplateBuilder.build();
 	}
 
